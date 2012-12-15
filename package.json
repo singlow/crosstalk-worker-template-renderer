@@ -1,0 +1,24 @@
+{
+  "name": "crosstalk-worker-template-renderer",
+  "version": "1.0.0",
+  "description": "Crosstalk Worker that renders objects with a template",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:singlow/crosstalk-worker-template-renderer"
+  },
+  "keywords": [
+    "template",
+    "crosstalk",
+    "worker"
+  ],
+  "author": "Jacob Williams <jacob@iakob.com>",
+  "maintainers": [
+    "Jacob Williams <jacob@iakob.com>"
+  ],
+  "crosstalk": {
+    "type": "worker"
+  },
+  "license": "MIT",
+  "private": true
+}
