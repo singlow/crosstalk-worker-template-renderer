@@ -5,6 +5,7 @@
  */
 "use strict";
 
+var logger = require( 'logger' );
 var config = require( 'config' );
 var _ = require( 'underscore' );
 
@@ -50,9 +51,12 @@ var renderRecursive = function renderRecursive(tpl, data) {
 var template = buildTemplateRecursive( config.template );
 
 var respond = function respond( data, callback ) {
-	if ( config.target ) {
+	callback = callback || false;
+	if ( !callback ) {
+		logger.info( "No callback. Emitting target message." );
 	  crosstalk.emit( config.target, renderRecursive( data ) );
 	} else {
+		logger.info( "Passing rendered template to callback." );
 		callback( null, renderRecursive( data ) );
 	}
 }

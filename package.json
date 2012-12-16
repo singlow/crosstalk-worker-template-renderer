@@ -1,6 +1,6 @@
 {
   "name": "crosstalk-worker-template-renderer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Crosstalk Worker that renders objects with a template",
   "main": "index.js",
   "repository": {
