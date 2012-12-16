@@ -5,26 +5,26 @@
  */
 "use strict";
 
-var logger = require( 'logger' );
 var config = require( 'config' );
 var _ = require( 'underscore' );
 
 var buildTemplate = function buildTemplate(str) {
-  return new Function("obj",
-			"var p=[],print=function(){p.push.apply(p,arguments);};" +
-			"with(obj){p.push('" +
+	var func = "with(obj){return ('" +
 			str
+				.replace(/\n/g, "\\n")
+				.replace(/\r/g, "\\r")
 				.replace(/[']/g, "\\'")
 				.split("{{").join("\'+")
 				.split("}}").join("+\'")
-		+ "');}return p.join('');");
+		  + "').replace(/\\n/g, \"\\n\") ;}";
+  return new Function("obj", func);
 };
 
 var buildTemplateRecursive = function buildTemplateRecursive(tpl) {
 	if (typeof tpl === 'string') {
 		return buildTemplate(tpl);
   }
-	if (typeof template === 'object') {
+	if (typeof tpl === 'object') {
 		var obj = {};
 		for (var prop in tpl) {
 			obj[prop] = buildTemplateRecursive(tpl[prop]);
@@ -53,11 +53,9 @@ var template = buildTemplateRecursive( config.template );
 var respond = function respond( data, callback ) {
 	callback = callback || false;
 	if ( !callback ) {
-		logger.info( "No callback. Emitting target message." );
-	  crosstalk.emit( config.target, renderRecursive( data ) );
+	  crosstalk.emit( config.target, renderRecursive( template, data ) );
 	} else {
-		logger.info( "Passing rendered template to callback." );
-		callback( null, renderRecursive( data ) );
+		callback( null, renderRecursive( template, data ) );
 	}
 }
 

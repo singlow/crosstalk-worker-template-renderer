@@ -21,4 +21,4 @@ template.shouldCallCallback(templateconfig.source);
 template.send( templateconfig.source, data, null, false );
 template.shouldEmit( templateconfig.target );
 
-ide.send( cxconfig.crosstalkToken, templateconfig.target, { to: 'rss@iakob.com', from: 'rss@iakob.com', subject: 'test', html: 'test body' } );
+//ide.send( cxconfig.crosstalkToken, templateconfig.target, { to: 'rss@iakob.com', from: 'rss@iakob.com', subject: 'test', html: 'test body' } );
